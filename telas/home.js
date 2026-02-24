@@ -1,62 +1,60 @@
-import { StyleSheet, Text, View, Button, Image, TextInput } from 'react-native';
-import { StatusBar } from 'expo-status-bar';
+import { StyleSheet, Text, View, Button, Image,TouchableOpacity } from "react-native";
 
-export default function LoginScreen({navigation}) {
+export default function HomeScreen({ route, navigation }) {
+  const { nome, telefone, email } = route.params || {};
+
   return (
     <View style={styles.container}>
-         <Image
-           style={styles.tinyLogo}
-           source={{
-             uri: 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png',
-           }}
-         />
-   
-         <TextInput
-           style={styles.input}
-           placeholder="email"
-           keyboardType="email-address"
-         />
-   
-         <TextInput
-           style={styles.input}
-           placeholder="senha"
-           secureTextEntry={true}
-         />
-   
-         <Button
-           title="Entrar"
-           color="#080808"
-           onPress={() => navigation.navigate('Home')}
-         />
-   
-         <Button
-           title="Cadastrar"
-           color="#080808"
-           onPress={() => navigation.navigate('cadastro')}
-         />
-   
-         <StatusBar style="auto" />
-       </View>
+      <View style={styles.card}>
+        <TouchableOpacity onPress={() => navigation.navigate("Contato", { nome, telefone, email })}>
+          <Image
+            style={styles.tinyLogo}
+            source={{
+              uri: "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
+            }}
+          />
+        </TouchableOpacity>
+
+        <View style={styles.info}>
+          <Text style={styles.nome}>{nome}</Text>
+          <Text style={styles.tel}>{telefone}</Text>
+        </View>
+      </View>
+    </View>
   );
 }
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "#fff",
+    padding: 15,
+  },
+  card: {
+    flexDirection: "row",
+    alignItems: "center",
+    borderWidth: 1,
+    borderColor: "#ddd",
+    borderRadius: 8,
+    padding: 12,
+    marginBottom: 10,
+    backgroundColor: "#f9f9f9",
   },
   tinyLogo: {
     width: 50,
     height: 50,
-
+    marginRight: 12,
+    borderRadius: 25,
   },
-  input: {
-    width: 200,
-    height: 40,
-    margin: 12,
-    borderWidth: 1,
-    padding: 10,
+  info: {
+    flexDirection: "column",  
+  },
+  nome: {
+    fontSize: 16,
+    fontWeight: "bold",
+  },
+  tel: {
+    fontSize: 14,
+    color: "#555",
+    marginTop: 2,             
   },
 });

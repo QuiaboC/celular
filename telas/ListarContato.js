@@ -1,30 +1,35 @@
 import { StyleSheet, Text, View, Button, Image, TextInput } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
+import { useState } from 'react';
 
-export default function Contato({ navigation }) {
+export default function Contato({ navigation, route }) {
+    const { nome, telefone,email } = route.params || {};
+
     return (
         <View style={styles.container}>
 
             <TextInput
                 style={styles.input}
-                placeholder="nome"
-                keyboardType="nome"
+                value={nome}
+                defaultValue={nome}
             />
             <TextInput
                 style={styles.input}
-                placeholder="email"
+                value={email}
+                defaultValue={email}
                 keyboardType="email-address"
             />
             <TextInput
+                value={telefone}
                 style={styles.input}
-                placeholder="telefone"
+                defaultValue={telefone}
                 keyboardType="telefone"
             />
 
             <Button
                 title="Alterar"
                 color="#080808"
-                onPress={() => navigation.navigate('Home')}
+                onPress={() => navigation.navigate('Home', {email, nome, telefone})}
             />
 
             <Button
