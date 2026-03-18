@@ -1,0 +1,42 @@
+{
+  "usuarios": [
+    {
+      "id": 1,
+      "nome": "Chrystian",
+      "email": "chrystian@email.com",
+      "senha": "123"
+    },
+    {
+      "id": 2,
+      "nome": "Maria",
+      "email": "maria@email.com",
+      "senha": "123"
+    }
+  ],
+  "contatos": [
+    {
+      "id": 101,
+      "usuarioId": 1,
+      "nomeContato": "Carlos",
+      "telefone": "81999990000"
+    },
+    {
+      "id": 102,
+      "usuarioId": 1,
+      "nomeContato": "Ana",
+      "telefone": "81988887777"
+    },
+    {
+      "nomeContato": "oi",
+      "telefone": "oi",
+      "usuarioId": 2,
+      "id": 104
+    },
+    {
+      "id": 105,
+      "nomeContato": "okkkk",
+      "telefone": "ok",
+      "usuarioId": 2
+    }
+  ]
+}

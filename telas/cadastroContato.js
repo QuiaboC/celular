@@ -7,47 +7,60 @@ import {
 } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { useState } from "react";
+import axios from "axios";
 
-export default function cadastroContato({ navigation }) {
+export default function CadastroContato({ route, navigation }) {
   const [nome, setNome] = useState("");
   const [telefone, setTelefone] = useState("");
-  const [email, setEmail] = useState("");
+
+  function inserirDados() {
+  const { usuario } = route.params || {};
+
+  if (!usuario?.id) {
+    console.log("Usuário não encontrado");
+    return;
+  }
+
+  axios
+    .post("http://localhost:3000/contatos", {
+      nomeContato: nome,
+      telefone: telefone,
+      usuarioId: usuario.id,
+    })
+    .then((response) => {
+      console.log("Salvo:", response.data);
+
+      navigation.goBack(); 
+    })
+    .catch((error) => {
+      console.log("Erro ao salvar:", error);
+    });
+}
   return (
     <View style={styles.container}>
       <TextInput
         style={styles.input}
-        placeholder="nome"
+        placeholder="Nome"
         value={nome}
         onChangeText={setNome}
       />
 
       <TextInput
         style={styles.input}
+        placeholder="Telefone"
         value={telefone}
-        placeholder="telefone"
         keyboardType="phone-pad"
         onChangeText={setTelefone}
       />
 
-      <TextInput
-        style={styles.input}
-        placeholder="email"
-        value={email}
-        keyboardType="email-address"
-        onChangeText={setEmail}
-      />
-
-      <TouchableOpacity
-        style={styles.ButtonH}
-        onPress={() => navigation.navigate("Home", { nome, telefone, email })}
-      >
+      <TouchableOpacity style={styles.ButtonH} onPress={inserirDados}>
         <Text style={styles.textoH}>Salvar</Text>
       </TouchableOpacity>
+
       <StatusBar style="auto" />
     </View>
   );
 }
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,

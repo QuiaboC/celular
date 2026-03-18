@@ -1,13 +1,11 @@
-import {  Text, TouchableOpacity} from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { Text, TouchableOpacity } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import HomeScreen from "./telas/home.js";
 import LoginScreen from "./telas/login.js";
-import CadastroScreen from "./telas/cadastroUsuario.js"
-import cadastroContato from "./telas/cadastroContato.js"
-import Contato from './telas/ListarContato.js';
-
-
+import CadastroScreen from "./telas/cadastroUsuario.js";
+import cadastroContato from "./telas/cadastroContato.js";
+import Contato from "./telas/ListarContato.js";
 
 const Stack = createNativeStackNavigator();
 
@@ -15,17 +13,32 @@ function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-         <Stack.Screen name="Login" component={LoginScreen} />
-        <Stack.Screen name="Home" component={HomeScreen} options={({navigation}) => ({title: 'lista de contatos',  
-        headerRight: () => (
-              <TouchableOpacity onPress={() => navigation.navigate('Cadastrar contato')}>
-                <Text style={{ fontSize: 24, marginRight: 10 }}>+</Text>
-              </TouchableOpacity>
-            ),
-            })}/>
-        <Stack.Screen name="Cadastro" component={CadastroScreen}/>
-        <Stack.Screen name="Cadastrar contato" component={cadastroContato}/>
-        <Stack.Screen name="Contato" component={Contato}/>
+        <Stack.Screen name="Login" component={LoginScreen} />
+        <Stack.Screen
+          name="Home"
+          component={HomeScreen}
+          options={({ navigation, route }) => ({
+            title: "lista de contatos",
+            headerRight: () => {
+              const usuario = route.params?.usuario;
+
+              return (
+                <TouchableOpacity
+                  onPress={() =>
+                    navigation.navigate("Cadastrar contato", {
+                      usuario: usuario,
+                    })
+                  }
+                >
+                  <Text style={{ fontSize: 24, marginRight: 10 }}>+</Text>
+                </TouchableOpacity>
+              );
+            },
+          })}
+        />
+        <Stack.Screen name="Cadastro" component={CadastroScreen} />
+        <Stack.Screen name="Cadastrar contato" component={cadastroContato} />
+        <Stack.Screen name="Contato" component={Contato} />
       </Stack.Navigator>
     </NavigationContainer>
   );
