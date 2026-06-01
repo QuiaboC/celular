@@ -2,6 +2,12 @@
   "expo": {
     "name": "mychrys2",
     "slug": "mychrys2",
-    "version": "1.0.0"
+    "version": "1.0.0",
+    "extra": {
+      "eas": {
+        "projectId": "6b6ab489-bc0d-4146-ac24-2a8dd721ff9c"
+      }
+    },
+    "owner": "quiabo"
   }
 }
